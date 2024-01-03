@@ -11,9 +11,11 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Link from "next/link";
-import useLoginStore from "@/store";
+
 import { useRouter } from "next/router";
 import { useToast } from "@chakra-ui/react";
+import useLoginStore from "@/store/auth-store/login";
+import { Spinner } from "@chakra-ui/react";
 
 const metaData = {
   title: "Login",
@@ -26,9 +28,11 @@ export default function Login() {
   const { loginHandler } = useLoginStore();
   const router = useRouter();
   const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const data = {
       email,
       password,
@@ -53,6 +57,7 @@ export default function Login() {
         isClosable: true,
       });
     }
+    setIsLoading(false);
   };
 
   return (
@@ -78,7 +83,7 @@ export default function Login() {
               boxShadow="0px 7px 29px 0px rgba(100, 100, 111, 0.2)"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              _placeholder={{ color: "gray.400" }}
+              _placeholder={{ color: "gray.400", fontSize: "0.875rem" }}
               id="email"
               data-testid="email"
             />
@@ -90,7 +95,7 @@ export default function Login() {
               boxShadow="0px 7px 29px 0px rgba(100, 100, 111, 0.2)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              _placeholder={{ color: "gray.400" }}
+              _placeholder={{ color: "gray.400", fontSize: "0.875rem" }}
               id="password"
               data-testid="password"
             />
@@ -101,8 +106,10 @@ export default function Login() {
                 borderRadius="20px"
                 width="100%"
                 onClick={handleSubmit}
+                isDisabled={isLoading ? true : false}
               >
-                Login
+                {isLoading && <Spinner color="white" />}
+                {!isLoading && "Login"}
               </Button>
             </Box>
             <FormHelperText marginTop="1rem" fontSize="0.875rem">
