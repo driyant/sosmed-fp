@@ -9,9 +9,11 @@ import {
   Text,
   FormHelperText,
 } from "@chakra-ui/react";
-
 import { useState } from "react";
 import Link from "next/link";
+import useLoginStore from "@/store";
+import { useRouter } from "next/router";
+import { useToast } from "@chakra-ui/react";
 
 const metaData = {
   title: "Login",
@@ -21,11 +23,36 @@ const metaData = {
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loginHandler } = useLoginStore();
+  const router = useRouter();
+  const toast = useToast();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted");
-    console.log(email, password);
+    const data = {
+      email,
+      password,
+    };
+    const loginResult = await loginHandler(data);
+    if (loginResult.success) {
+      router.push("/dashboard");
+      toast({
+        title: "Success",
+        description: "Login success, signing in",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
+      console.log(loginResult.error);
+      toast({
+        title: "Error",
+        description: loginResult.error,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -42,8 +69,7 @@ export default function Login() {
             Login
           </Heading>
           <Text color="gray.400">Sign in with your account</Text>
-
-          <FormControl as="form" marginTop="3rem" onSubmit={handleSubmit}>
+          <FormControl as="form" marginTop="3rem">
             <FormLabel htmlFor="email">Email address</FormLabel>
             <Input
               type="email"
@@ -74,11 +100,12 @@ export default function Login() {
                 variant="solid"
                 borderRadius="20px"
                 width="100%"
+                onClick={handleSubmit}
               >
                 Login
               </Button>
             </Box>
-            <FormHelperText marginTop="1rem">
+            <FormHelperText marginTop="1rem" fontSize="0.875rem">
               Don't have account?{" "}
               <Box as="span" textDecoration="underline">
                 <Link href="/register">Sign Up</Link>

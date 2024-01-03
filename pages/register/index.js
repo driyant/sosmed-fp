@@ -65,7 +65,7 @@ const RegisterPage = () => {
                 Login
               </Button>
             </Box>
-            <FormHelperText marginTop="1rem">
+            <FormHelperText marginTop="1rem" fontSize="0.875rem">
               Already have account?{" "}
               <Box as="span" textDecoration="underline">
                 <Link href="/">Login</Link>
