@@ -1,4 +1,5 @@
-import Layout from "./components/Layout";
+import React, { useState } from "react";
+import Layout from "../components/Layout";
 import {
   Box,
   Heading,
@@ -9,25 +10,16 @@ import {
   Text,
   FormHelperText,
 } from "@chakra-ui/react";
-
-import { useState } from "react";
 import Link from "next/link";
 
 const metaData = {
-  title: "Login",
-  metaDescription: "Social Media App Login Sanber Next JS- Ryanta",
+  title: "Register",
+  metaDescription: "Social Media App Register Sanber Next JS- Ryanta",
 };
 
-export default function Login() {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("submitted");
-    console.log(email, password);
-  };
-
   return (
     <Layout metaData={metaData}>
       <Box
@@ -39,12 +31,11 @@ export default function Login() {
       >
         <Box width="80%">
           <Heading as="h3" size="lg">
-            Login
+            Sign Up
           </Heading>
-          <Text color="gray.400">Sign in with your account</Text>
-
-          <FormControl as="form" marginTop="3rem" onSubmit={handleSubmit}>
-            <FormLabel htmlFor="email">Email address</FormLabel>
+          <Text color="gray.400">Register your account</Text>
+          <FormControl as="form" marginTop="3rem">
+            <FormLabel>Email address</FormLabel>
             <Input
               type="email"
               placeholder="Your Email Address"
@@ -53,10 +44,8 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               _placeholder={{ color: "gray.400" }}
-              id="email"
-              data-testid="email"
             />
-            <FormLabel htmlFor="password">Password</FormLabel>
+            <FormLabel>Password</FormLabel>
             <Input
               type="password"
               placeholder="Your Password"
@@ -65,8 +54,6 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               _placeholder={{ color: "gray.400" }}
-              id="password"
-              data-testid="password"
             />
             <Box textAlign="right" marginTop="1rem">
               <Button
@@ -79,9 +66,9 @@ export default function Login() {
               </Button>
             </Box>
             <FormHelperText marginTop="1rem">
-              Don't have account?{" "}
+              Already have account?{" "}
               <Box as="span" textDecoration="underline">
-                <Link href="/register">Sign Up</Link>
+                <Link href="/">Login</Link>
               </Box>
             </FormHelperText>
           </FormControl>
@@ -89,4 +76,6 @@ export default function Login() {
       </Box>
     </Layout>
   );
-}
+};
+
+export default RegisterPage;
