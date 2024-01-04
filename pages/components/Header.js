@@ -1,9 +1,23 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import {
+  Box,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Button,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import { Image as ImageChakra } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+  const handleLogout = () => {
+    localStorage.clear("token");
+    localStorage.clear("expires_at");
+    router.push("/");
+  };
   return (
     <>
       <Box
@@ -31,14 +45,31 @@ const Header = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Box width="40px" height="40px" borderRadius="full" overflow="hidden">
-            <ImageChakra
-              src="/images/woman-close-up.jpg"
-              alt="profile"
-              objectFit="cover"
-              boxShadow="0px 8px 24px rgba(149, 157, 165, 0.2)"
-            />
-          </Box>
+          <Menu>
+            <MenuButton
+              as={Button}
+              bg="transparent" // Set background color to transparent
+              _hover={{ bg: "transparent" }} // Set background color on hover
+            >
+              <Box
+                width="40px"
+                height="40px"
+                borderRadius="full"
+                overflow="hidden"
+                transition="box-shadow 0.3s ease-in-out" // Add transition effect to box-shadow
+                _hover={{ boxShadow: "0px 8px 24px rgba(149, 157, 165, 0.2)" }} // Set box-shadow on hover
+              >
+                <ImageChakra
+                  src="/images/woman-close-up.jpg"
+                  alt="profile"
+                  objectFit="cover"
+                />
+              </Box>
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
         </Box>
       </Box>
     </>
