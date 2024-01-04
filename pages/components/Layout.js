@@ -24,7 +24,7 @@ const Layout = ({ children, metaData }) => {
         >
           <Image
             src="/images/people.jpg"
-            alt="social-media-app-ryanta"
+            alt="cherrish-hub-app-ryanta"
             width={0}
             height={0}
             sizes="100vw"
