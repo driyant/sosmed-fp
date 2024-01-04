@@ -13,8 +13,11 @@ const useLoginStore = create((set) => ({
 
       if (response.status === 200) {
         set({ isLogin: true });
-        const { token } = response.data.data.data;
+        const { token, expires_at } = response.data.data.data;
         localStorage.setItem("token", token);
+        const expirationDate = new Date(expires_at);
+        const formattedExpiration = expirationDate.toLocaleString("en-US");
+        localStorage.setItem("expires_at", formattedExpiration);
         return { success: true, error: null };
       }
     } catch (error) {
