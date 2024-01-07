@@ -30,8 +30,7 @@ const TweetReply = () => {
   const [replies, setReplies] = useState([]);
   const toast = useToast();
 
-  const handleReply = async (e) => {
-    e.preventDefault();
+  const handleReply = async () => {
     setIsLoading(true);
     const data = {
       reply: comment,
