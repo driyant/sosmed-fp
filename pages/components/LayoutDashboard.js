@@ -4,12 +4,13 @@ import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Header from "./Header";
 import FixedNavigation from "./FixedNavigation";
+import Cookies from "js-cookie";
 
 const LayoutDashboard = ({ children, metaData }) => {
   const { title, metaDescription } = metaData;
   const router = useRouter();
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!Cookies.get("token")) {
       router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,7 +34,7 @@ const LayoutDashboard = ({ children, metaData }) => {
         display="grid"
         gridTemplateColumns="1fr 2fr 1fr"
         gridAutoRows="auto"
-        paddingTop={{ base: "70px" }}
+        paddingTop={{ base: "70px", lg: "0" }}
         paddingBottom={{ base: "60px" }}
       >
         {children}
