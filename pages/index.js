@@ -9,13 +9,14 @@ import {
   Text,
   FormHelperText,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { useRouter } from "next/router";
 import { useToast } from "@chakra-ui/react";
 import useLoginStore from "@/store/auth-store/login";
 import { Spinner } from "@chakra-ui/react";
+import Cookies from "js-cookie";
 
 const metaData = {
   title: "Login",
@@ -59,6 +60,12 @@ export default function Login() {
     }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (Cookies.get("token")) {
+      router("/dashboard");
+    }
+  }, []);
 
   return (
     <Layout metaData={metaData}>

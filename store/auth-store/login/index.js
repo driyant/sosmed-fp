@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const useLoginStore = create((set) => ({
   isLogin: false,
@@ -14,10 +15,10 @@ const useLoginStore = create((set) => ({
       if (response.status === 200) {
         set({ isLogin: true });
         const { token, expires_at } = response.data.data.data;
-        localStorage.setItem("token", token);
+        Cookies.set("token", token);
         const expirationDate = new Date(expires_at);
         const formattedExpiration = expirationDate.toLocaleString("en-US");
-        localStorage.setItem("expires_at", formattedExpiration);
+        Cookies.set("expires", formattedExpiration);
         return { success: true, error: null };
       }
     } catch (error) {

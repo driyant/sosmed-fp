@@ -10,13 +10,26 @@ import {
 import Image from "next/image";
 import { Image as ImageChakra } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const Header = () => {
   const router = useRouter();
-  const handleLogout = () => {
-    localStorage.clear("token");
-    localStorage.clear("expires_at");
-    router.push("/");
+
+  const handleLogout = async () => {
+    try {
+      await axios({
+        url: "/api/logout",
+        headers: {
+          Authorization: Cookies.get("token"),
+        },
+      });
+      Cookies.remove("token");
+      Cookies.remove("expires");
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
