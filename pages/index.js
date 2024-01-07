@@ -61,12 +61,6 @@ export default function Login() {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    if (Cookies.get("token")) {
-      router("/dashboard");
-    }
-  }, []);
-
   return (
     <Layout metaData={metaData}>
       <Box
@@ -120,7 +114,7 @@ export default function Login() {
               </Button>
             </Box>
             <FormHelperText marginTop="1rem" fontSize="0.875rem">
-              Don't have account?{" "}
+              Do not have account?{" "}
               <Box as="span" textDecoration="underline">
                 <Link href="/register">Sign Up</Link>
               </Box>

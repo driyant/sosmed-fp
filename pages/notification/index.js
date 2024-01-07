@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { formatTimeAgo, formattedDate } from "../helpers";
+import { formatTimeAgo, formattedDate } from "../../helpers";
 
 const metaData = {
   title: "Notification",

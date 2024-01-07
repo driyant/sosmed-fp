@@ -3,7 +3,7 @@ import { Box, Text, Heading } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChatLeft } from "react-icons/bs";
-import { formattedDate } from "../helpers";
+import { formattedDate } from "../../helpers";
 import { useRouter } from "next/router";
 
 const CardPost = ({ posts, handleLike, handleUnlike }) => {

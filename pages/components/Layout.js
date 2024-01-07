@@ -3,12 +3,12 @@ import { Box } from "@chakra-ui/react";
 import Image from "next/image";
 
 const Layout = ({ children, metaData }) => {
-  const { title, metaDescription } = metaData;
+  const { title, description } = metaData || {};
   return (
     <>
       <Head>
         <title>{`CherishHub | ${title}`}</title>
-        <meta name="description" content={`${metaDescription}`} />
+        <meta name="description" content={`${description}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

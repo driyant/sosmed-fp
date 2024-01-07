@@ -10,7 +10,7 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { formattedDate } from "../helpers";
+import { formattedDate } from "../../helpers";
 
 const CardPostReply = ({
   created_at,
