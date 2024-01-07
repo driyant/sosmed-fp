@@ -17,8 +17,7 @@ const Tweet = () => {
   const { id } = router.query;
   const token = Cookies.get("token");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setIsLoading(true);
     try {
       await axios({
