@@ -7,7 +7,7 @@ import FixedNavigation from "./FixedNavigation";
 import Cookies from "js-cookie";
 
 const LayoutDashboard = ({ children, metaData }) => {
-  const { title, metaDescription } = metaData;
+  const { title, description } = metaData || {};
   const router = useRouter();
   useEffect(() => {
     if (!Cookies.get("token")) {
@@ -21,7 +21,7 @@ const LayoutDashboard = ({ children, metaData }) => {
         <title>{`CherishHub | ${title}`}</title>
         <meta
           name="description"
-          content={`${metaDescription} - Cherish Love, Connect Hearts`}
+          content={`${description} - Cherish Love, Connect Hearts`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
