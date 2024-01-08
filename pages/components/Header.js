@@ -19,9 +19,9 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await axios({
-        url: "/api/logout",
+        url: `${process.env.NEXT_PUBLIC_API}/api/logout`,
         headers: {
-          Authorization: Cookies.get("token"),
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       });
       Cookies.remove("token");
